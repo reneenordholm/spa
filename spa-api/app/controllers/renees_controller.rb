@@ -1,0 +1,2 @@
+class ReneesController < ApplicationController
+end
