@@ -12,11 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_12_09_221248) do
 
-  create_table "renees", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "trades", force: :cascade do |t|
     t.string "trade_type"
     t.string "description"
