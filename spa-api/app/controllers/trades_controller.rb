@@ -4,5 +4,11 @@ class TradesController < ApplicationController
         render json: trade, :except => [:created_at, :updated_at]
     end
 
+    private
+
+    def trade_params
+        params.require(:trade).permit(:trade_type, :title, :description, :img)
+    end
+
 
 end
