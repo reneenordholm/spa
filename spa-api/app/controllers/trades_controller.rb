@@ -1,7 +1,7 @@
 class TradesController < ApplicationController
-    def show
-        trade = Trade.find(params[:id])
-        render json: trade
+    def index
+        trade = Trade.all
+        render json: trade, :except => [:created_at, :updated_at]
     end
 
 
