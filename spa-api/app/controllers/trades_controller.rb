@@ -1,7 +1,7 @@
 class TradesController < ApplicationController
     def index
-        trade = Trade.all
-        render json: trade, :except => [:created_at, :updated_at]
+        trades = Trade.all
+        render json: trades.to_json(:except => [:created_at, :updated_at])
     end
 
     private
