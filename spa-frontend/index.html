@@ -7,15 +7,22 @@
   </head>
   <body>
     <header>
-      <div class=login>
-          <label for="email"><b>Username</b></label>
-          <input type="text" placeholder="Enter Username" name="email" required>
-          <br>
-          <label for="password"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="password" required>
-          <br>
-          <button type="submit">Login</button>
-      </div>
+        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+
+        <div id="id01" class="modal">
+          
+          <form class="modal-content animate" action="/login" method="post">
+            <div class="container">
+              <label for="uname"><b>Username</b></label>
+              <input type="text" placeholder="Enter Username" name="uname" required>
+        
+              <label for="psw"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="psw" required>
+                
+              <button type="submit">Login</button>
+            </div>
+          </form>
+        </div>
       <div class=header><br><br><br><br><br><br><br><br>
           <h2>
           Hi, my name is Renee.<br>

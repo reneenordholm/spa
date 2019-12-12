@@ -1,16 +1,12 @@
 class ApplicationController < ActionController::API
-
-    def logged_in?
-        log_in_error if !current_concierge
-    end
-
-    def log_in(renee)
-        session[:renee_id] = renee.id
-    end
+    include ActionController::Cookies
+    include ActionController::RequestForgeryProtection
+  
+    protect_from_forgery with: :exception
 
     private
 
-    def current_concierge
+    def is_renee?
         Renee.find(session[:renee_id]) if session[:renee_id]
     end
 end
