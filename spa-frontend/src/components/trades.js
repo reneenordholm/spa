@@ -7,7 +7,10 @@ class Trades {
     }
 
     fetchAndLoadTrades() {
-        this.adapter.getTrades().then(trades => this.renderTrades(trades))
+        this.adapter
+            .getTrades()
+            .then(trades => 
+                this.renderTrades(trades))
     }
 
     renderTrades(trades) {
