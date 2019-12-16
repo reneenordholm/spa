@@ -4,9 +4,9 @@ class ApplicationController < ActionController::API
   
     # protect_from_forgery with: :exception
 
-    private
+    # private
 
-    def is_renee?
-        Renee.find(session[:renee_id]) if session[:renee_id]
-    end
+    # def is_renee?
+    #     Renee.find(session[:renee_id]) if session[:renee_id]
+    # end
 end

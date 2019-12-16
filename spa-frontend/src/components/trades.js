@@ -1,11 +1,13 @@
 class Trades {
     constructor() {
-        this.trades = []
+        // this.trades = []
         this.adapter = new TradesAdapter()
         // this.bindEventListeners()
         this.fetchAndLoadTrades()
     }
 
+    // use adapter to make call to backend api
+    // send result to render method
     fetchAndLoadTrades() {
         this.adapter
             .getTrades()
@@ -13,10 +15,11 @@ class Trades {
                 this.renderTrades(trades))
     }
 
+    // render all trades appropriately
     renderTrades(trades) {
         // for each trade
         for(const trade in trades){
-            // add object to page depending on type
+            // add object to page by type
             if (trades[trade]['trade_type'] === "about") {
                 const about = document.querySelector('div.about')
                 const pImg = document.createElement('IMG')
@@ -29,7 +32,7 @@ class Trades {
                 p.innerText = trades[trade]['description']
                 p. setAttribute("class", "box")
                 about.appendChild(p)
-            }
+            } 
         }
     }
 }
