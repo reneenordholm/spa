@@ -1,5 +1,7 @@
 header {
     background-color: rgb(4, 132, 155);
+    margin: 0;
+    padding: 0;
 }
 
 header h2 { 
@@ -20,11 +22,12 @@ html, body {
   box-sizing: border-box;
 }
 
+
 .box {
   float: left;
   width: 50%;
-  /* padding: 50px;
-  height: 300px; */
+  /* padding: 50px; */
+  height: 400px;
 }
 
 .clearfix::after {
@@ -35,7 +38,43 @@ html, body {
 
 p.box {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  padding: 50px;
-  height: 300px;
+  width: 50%;
+  padding: 50px; 
+  height: 400px;
 }
 
+/* Work section */
+/* Center website */
+.main {
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 50px;
+  word-break: break-all;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.row {
+  margin: 8px -16px;
+}
+
+/* Add padding BETWEEN each column */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+/* Create three columns that floats next to each other */
+.column {
+  float: left;
+  width: 33%;
+}
+
+/* Content */
+.content {
+  background-color: white;
+  padding: 10px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
