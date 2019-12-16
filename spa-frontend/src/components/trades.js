@@ -24,7 +24,6 @@ class Trades {
                 const about = document.querySelector('div.about')
                 const pImg = document.createElement('IMG')
                 pImg.setAttribute("src", trades[trade]['img'])
-                pImg.setAttribute("width", "400")
                 pImg.setAttribute("class", "box")
                 about.appendChild(pImg)
 
