@@ -22,17 +22,19 @@ class Trades {
             // add object to page by type
             if (trades[trade]['trade_type'] === "about") {
                 const about = document.querySelector('div.about')
+
                 const pImg = document.createElement('IMG')
                 pImg.setAttribute("src", trades[trade]['img'])
                 pImg.setAttribute("style", "width:50%")
                 pImg.setAttribute("class", "box")
                 about.appendChild(pImg)
 
-                const p = document.createElement('p')
-                p.innerText = trades[trade]['description']
+                const pText = document.createElement('p')
+                pText.innerText = trades[trade]['description']
                 // p.setAttribute("style", "width:50%")
-                p. setAttribute("class", "box")
-                about.appendChild(p)
+                pText.setAttribute("class", "box")
+                about.appendChild(pText)
+
             } else if (trades[trade]['trade_type'] === "work") {
                 const work = document.querySelector('div.work')
 
