@@ -1,6 +1,6 @@
-class AuthController < ApplicationController
+class SessionsController < ApplicationController
     
-    def login
+    def create
         renee = Renee.find_by(email: params[:email])
    
         if (renee && renee.authenticate(params[:password]))

@@ -1,9 +1,9 @@
 class ReneesController < ApplicationController
 
-    # private
+    private
 
-    # def renee_params
-    #     params.require(:renee).permit(:password, :email)
-    # end
+    def renee_params
+        params.require(:renee).permit(:password, :email)
+    end
 
 end

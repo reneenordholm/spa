@@ -18,27 +18,25 @@ submit.addEventListener('click', event => {
 // 'POST' request to create new toy objects
 function postTest(event) {
     event.preventDefault(event)
-    const form = document.getElementsByClassName('container')
-
-    console.log(event)
-    console.log(form)
-    return fetch("http://localhost:3000/login", {
+    const form = document.getElementsByClassName('modal-content animate')[0]
+    return fetch("http://localhost:3000/sessions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        email: event.email.value,
-        password: event.password.value
+        email: form[0].value,
+        password: form[1].value
       })
     })
-    .then(function(response) { 
-      return response.json()
+    .then(response => {
+      localStorage.setItem("user", JSON.stringify(response.data));
+      // return response.json()
     })
-    .then(function(json) {
-      console.loog(json)
-    })
+    // .then(function(json) {
+    //   console.log(json)
+    // })
   }
 
 // DELETE request to logout 
