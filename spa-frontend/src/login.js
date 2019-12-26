@@ -80,7 +80,6 @@ if (logoutButton) {
 }
 
 function endSession() {
-  modal.style.display = "none";
   localStorage.clear()
   sessionStatus()
 }
