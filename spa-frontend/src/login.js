@@ -1,6 +1,11 @@
 // Login
 // Get the modal
-var modal = document.getElementById('id01');
+const modal = document.getElementById('id01');
+const user = localStorage.getItem("user")
+
+document.addEventListener('DOMContentLoaded', () => {
+  endSession()   
+})
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
@@ -15,44 +20,38 @@ submit.addEventListener('click', event => {
   })
 
 // POST request to login
-// 'POST' request to create new toy objects
-function postTest(event) {
+async function postTest(event) {
     event.preventDefault(event)
     const form = document.getElementsByClassName('modal-content animate')[0]
-    return fetch("http://localhost:3000/sessions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        email: form[0].value,
-        password: form[1].value
-      })
+    const response = await fetch("http://localhost:3000/sessions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      email: form[0].value,
+      password: form[1].value
     })
-    .then(response => {
-      // console.log(response.data)
-      // localStorage.setItem("user", JSON.stringify(response.data));
-      // console.log(localStorage)
-      // console.log(localStorage.loggedIn)
-      return response.json()
-
-    })
-    .then(function(json) {
-      if (json.renee) {
-        renderEditMode(json)
-      } else {
-        renderLoginFailed(json)
-      }
-    })
+  });
+  const json = await response.json();
+    if (json.renee) {
+      localStorage.setItem("user", json.renee.email);
+      renderEditMode(json);
+    }
+    else {
+      renderLoginFailed(json);
+    }
   }
 
   function renderEditMode(json) {
-    // const buttonText = document.getElementById('login-button')
-    // buttonText.innerText = "Hi Renee";
-
     modal.style.display = "none";
     console.log("Login Successful")
+    console.log(localStorage.getItem("user"))
+    const buttonText = document.getElementById('main-login-button')
+    buttonText.innerText = "Logout";
+    const logoutButton = modal.querySelector('button')
+    logoutButton.addEventListener("click", localStorage.clear())
   }
 
   function renderLoginFailed(json) {
@@ -60,7 +59,19 @@ function postTest(event) {
   }
 
 // DELETE request to logout 
+function endSession() {
+  if (localStorage.getItem("user") === "reneenordholm@gmail.com") {
+    // localStorage.clear()
 
+    console.log(user)
+    console.log("Logged in")
+  } else {
+    // localStorage.clear()
+    console.log(user)
+    console.log("Logged out")
+
+  }
+}
 
 
 

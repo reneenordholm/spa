@@ -4,6 +4,8 @@ class Trade {
         this.img = trade.img
         this.description = trade.description
         this.title = trade.title
+        // console.log(localStorage.getItem("user"))
+
     }
 
     renderTrade() {
