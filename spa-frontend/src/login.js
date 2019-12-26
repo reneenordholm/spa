@@ -53,7 +53,6 @@ function postTest(event) {
 
     modal.style.display = "none";
     console.log("Login Successful")
-
   }
 
   function renderLoginFailed(json) {
