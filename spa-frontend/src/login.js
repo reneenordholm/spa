@@ -2,9 +2,10 @@
 // Get the modal
 const modal = document.getElementById('id01');
 const user = localStorage.getItem("user")
+const buttonText = document.getElementById('main-login-button')
 
 document.addEventListener('DOMContentLoaded', () => {
-  endSession()   
+  sessionStatus()   
 })
 
 // When the user clicks anywhere outside of the modal, close it
@@ -48,29 +49,40 @@ async function postTest(event) {
     modal.style.display = "none";
     console.log("Login Successful")
     console.log(localStorage.getItem("user"))
-    const buttonText = document.getElementById('main-login-button')
-    buttonText.innerText = "Logout";
-    const logoutButton = modal.querySelector('button')
-    logoutButton.addEventListener("click", localStorage.clear())
+    buttonText.id = "logout-button"
+    buttonText.innerText = "Logout"    
   }
 
   function renderLoginFailed(json) {
     console.log("Login Failed")
   }
 
-// DELETE request to logout 
-function endSession() {
-  if (localStorage.getItem("user") === "reneenordholm@gmail.com") {
-    // localStorage.clear()
 
+// DELETE request to logout 
+function sessionStatus() {
+  if (user === "reneenordholm@gmail.com") {
     console.log(user)
+    buttonText.id = "logout-button"
+    buttonText.innerText = "Logout"
     console.log("Logged in")
   } else {
-    // localStorage.clear()
+    localStorage.clear()
+    modal.style.display = "none";
+    buttonText.innerText = "Login";
     console.log(user)
     console.log("Logged out")
-
   }
+}
+
+const logoutButton = document.getElementById('logout-button')
+if (logoutButton) {
+  logoutButton.addEventListener('click', endSession())
+}
+
+function endSession() {
+  modal.style.display = "none";
+  localStorage.clear()
+  sessionStatus()
 }
 
 
