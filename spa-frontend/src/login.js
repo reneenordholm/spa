@@ -31,12 +31,33 @@ function postTest(event) {
       })
     })
     .then(response => {
-      localStorage.setItem("user", JSON.stringify(response.data));
-      // return response.json()
+      // console.log(response.data)
+      // localStorage.setItem("user", JSON.stringify(response.data));
+      // console.log(localStorage)
+      // console.log(localStorage.loggedIn)
+      return response.json()
+
     })
-    // .then(function(json) {
-    //   console.log(json)
-    // })
+    .then(function(json) {
+      if (json.renee) {
+        renderEditMode(json)
+      } else {
+        renderLoginFailed(json)
+      }
+    })
+  }
+
+  function renderEditMode(json) {
+    // const buttonText = document.getElementById('login-button')
+    // buttonText.innerText = "Hi Renee";
+
+    modal.style.display = "none";
+    console.log("Login Successful")
+
+  }
+
+  function renderLoginFailed(json) {
+    console.log("Login Failed")
   }
 
 // DELETE request to logout 
