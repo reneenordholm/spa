@@ -49,8 +49,9 @@ async function postTest(event) {
     modal.style.display = "none";
     console.log("Login Successful")
     console.log(localStorage.getItem("user"))
-    buttonText.id = "logout-button"
-    buttonText.innerText = "Logout"    
+    buttonText.setAttribute("onclick", "");
+    buttonText.innerText = "Logout"
+
   }
 
   function renderLoginFailed(json) {
@@ -62,26 +63,32 @@ async function postTest(event) {
 function sessionStatus() {
   if (user === "reneenordholm@gmail.com") {
     console.log(user)
-    buttonText.id = "logout-button"
+    // buttonText.id = "logout-button"
+    buttonText.setAttribute("onclick", endSession);
     buttonText.innerText = "Logout"
     console.log("Logged in")
   } else {
-    localStorage.clear()
-    modal.style.display = "none";
     buttonText.innerText = "Login";
+    // buttonText.id = "main-login-button"
+    buttonText.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
     console.log(user)
     console.log("Logged out")
   }
 }
 
-const logoutButton = document.getElementById('logout-button')
-if (logoutButton) {
-  logoutButton.addEventListener('click', endSession())
-}
+// const logoutButton = document.getElementById('logout-button')
+// if (logoutButton) {
+//   logoutButton.addEventListener('click', endSession())
+// }
 
 function endSession() {
   localStorage.clear()
-  sessionStatus()
+  buttonText.innerText = "Login";
+  // buttonText.id = "main-login-button"
+  buttonText.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
+  console.log(user)
+  console.log("Logged out")
+  // sessionStatus()
 }
 
 
