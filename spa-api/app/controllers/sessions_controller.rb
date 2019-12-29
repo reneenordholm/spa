@@ -12,6 +12,11 @@ class SessionsController < ApplicationController
         end
     end
 
+    def destroy
+        session.clear
+        render json: {messages: "logged out"}
+    end
+
     private
 
     def login(renee)
