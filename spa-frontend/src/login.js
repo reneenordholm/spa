@@ -71,15 +71,12 @@ async function endSession(event) {
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
-    },
-    // body: JSON.stringify({
-    //   email: localStorage.getItem("user")
-    // })
+    }
   });
   const json = await response.json()
-  console.log(json)
-  localStorage.clear();
-  sessionStatus();
+    console.log(json)
+    localStorage.clear();
+    sessionStatus();
 }
 
 // check session status
