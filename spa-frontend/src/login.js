@@ -1,9 +1,8 @@
-// Login
-// Get the modal
 const modal = document.getElementById('id01');
 const user = localStorage.getItem("user")
 const buttonText = document.getElementById('main-login-button')
 
+// load session status on page load
 document.addEventListener('DOMContentLoaded', () => {
   sessionStatus()   
 })
@@ -36,6 +35,7 @@ async function startSession(event) {
     password: form[1].value
   })
 });
+// upon successful login set user as localStorage key
 const json = await response.json();
   if (json.renee) {
     localStorage.setItem("user", json.renee.email);
@@ -49,8 +49,6 @@ const json = await response.json();
 // logged in and show edit buttons
 function renderEditMode(json) {
   modal.style.display = "none";
-  console.log("Login Successful")
-  console.log(localStorage.getItem("user"))
   buttonText.id = "logout-button"
   buttonText.removeAttribute("onclick")
   buttonText.innerText = "Logout"
@@ -64,7 +62,6 @@ function renderLoginFailed(json) {
 
 //delete request to clear session and localStorage
 async function endSession(event) {
-  console.log(event)
   event.preventDefault(event)
   const response = await fetch(`http://localhost:3000/sessions`, {
     method: "DELETE",
@@ -74,7 +71,6 @@ async function endSession(event) {
     }
   });
   const json = await response.json()
-    console.log(json)
     localStorage.clear();
     sessionStatus();
 }
@@ -82,17 +78,13 @@ async function endSession(event) {
 // check session status
 function sessionStatus() {
   if (user === "reneenordholm@gmail.com") {
-    console.log(user)
     buttonText.setAttribute("onclick", "document.getElementById('logout-button')")
     buttonText.id = "logout-button"
     buttonText.addEventListener('click', event => {endSession(event) })  
     buttonText.innerText = "Logout"
-    console.log("Logged in")
   } else {
     buttonText.innerText = "Login";
     buttonText.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
-    console.log(user)
-    console.log("Logged out")
   }
 }
 
