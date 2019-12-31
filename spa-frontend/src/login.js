@@ -2,12 +2,21 @@ const modal = document.getElementById('id01');
 const user = localStorage.getItem("user")
 const buttonText = document.getElementById('main-login-button')
 
+if (document.getElementById('logout-button')) {
+  const logoutButton = document.getElementById('logout-button')
+  logoutButton.addEventListener('click', event => {
+    endSession(event)
+    console.log("end session")
+  })
+}
+
 // load session status on page load
 document.addEventListener('DOMContentLoaded', () => {
   sessionStatus()   
+  console.log("page load")
 })
 
-// When the user clicks anywhere outside of the modal, close it
+// When the user clicks anywhere outside of the login modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
@@ -18,6 +27,7 @@ window.onclick = function(event) {
 const submit = document.getElementById('login-button')
 submit.addEventListener('click', event => {
     startSession(event)
+    console.log("start session")
   })
 
 // POST request to login
@@ -40,24 +50,26 @@ const json = await response.json();
   if (json.renee) {
     localStorage.setItem("user", json.renee.email);
     renderEditMode(json);
+    console.log("session started")
   }
   else {
     renderLoginFailed(json);
   }
 }
 
-// logged in and show edit buttons
-function renderEditMode(json) {
-  modal.style.display = "none";
-  buttonText.id = "logout-button"
-  buttonText.removeAttribute("onclick")
-  buttonText.innerText = "Logout"
-  buttonText.addEventListener('click', event => {endSession(event) })  
-}
-
 // if log in fails
 function renderLoginFailed(json) {
   console.log("Login Failed")
+}
+
+// logged in and show edit buttons
+function renderEditMode(json) {
+  modal.style.display = "none";
+  buttonText.setAttribute("id", "logout-button")
+  buttonText.removeAttribute("onclick")
+  buttonText.innerText = "Logout"
+  buttonText.addEventListener('click', event => { endSession(event) })  
+  console.log("logged in, edit mode")
 }
 
 //delete request to clear session and localStorage
@@ -72,21 +84,28 @@ async function endSession(event) {
   });
   const json = await response.json()
     localStorage.clear();
-    sessionStatus();
+    resetStatus()
+    console.log("session ended")
+}
+
+// reset button values if page is refreshed while still logged in
+function resetStatus() {
+  buttonText.innerHTML = "Login";
+  buttonText.setAttribute("id", "main-login-button")
+  buttonText.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
+  console.log("reset status")
 }
 
 // check session status
 function sessionStatus() {
   if (user === "reneenordholm@gmail.com") {
-    buttonText.setAttribute("onclick", "document.getElementById('logout-button')")
-    buttonText.id = "logout-button"
-    buttonText.addEventListener('click', event => {endSession(event) })  
+    buttonText.setAttribute("id", "logout-button")
     buttonText.innerText = "Logout"
+    buttonText.addEventListener('click', event => { endSession(event) })  
+    console.log("session status logged in")
   } else {
     buttonText.innerText = "Login";
     buttonText.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
+    console.log("session status logged out")
   }
 }
-
-
-
