@@ -4,15 +4,12 @@ class Trade {
         this.img = trade.img
         this.description = trade.description
         this.title = trade.title
-        // if (user) {
-            // this.user = user
-        // }
-        // 
-        // conosole.log(localStorage.getItem("user"))
+        if (user) {
+            this.user = user
+        }
     }
 
     renderTrade() {
-        // console.log(this.user)
         // for each trade
         // add object to page by type
         if (this.trade_type === "about") {

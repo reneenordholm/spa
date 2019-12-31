@@ -6,14 +6,14 @@ if (document.getElementById('logout-button')) {
   const logoutButton = document.getElementById('logout-button')
   logoutButton.addEventListener('click', event => {
     endSession(event)
-    console.log("end session")
+    // console.log("end session")
   })
 }
 
 // load session status on page load
 document.addEventListener('DOMContentLoaded', () => {
   sessionStatus()   
-  console.log("page load")
+  // console.log("page load")
 })
 
 // When the user clicks anywhere outside of the login modal, close it
@@ -27,7 +27,7 @@ window.onclick = function(event) {
 const submit = document.getElementById('login-button')
 submit.addEventListener('click', event => {
     startSession(event)
-    console.log("start session")
+    // console.log("start session")
   })
 
 // POST request to login
@@ -50,7 +50,7 @@ const json = await response.json();
   if (json.renee) {
     localStorage.setItem("user", json.renee.email);
     renderEditMode(json);
-    console.log("session started")
+    // console.log("session started")
   }
   else {
     renderLoginFailed(json);
@@ -59,7 +59,7 @@ const json = await response.json();
 
 // if log in fails
 function renderLoginFailed(json) {
-  console.log("Login Failed")
+  // console.log("Login Failed")
 }
 
 // logged in and show edit buttons
@@ -69,7 +69,7 @@ function renderEditMode(json) {
   buttonText.removeAttribute("onclick")
   buttonText.innerText = "Logout"
   buttonText.addEventListener('click', event => { endSession(event) })  
-  console.log("logged in, edit mode")
+  // console.log("logged in, edit mode")
 }
 
 //delete request to clear session and localStorage
@@ -82,10 +82,10 @@ async function endSession(event) {
       "Accept": "application/json"
     }
   });
-  const json = await response.json()
-    localStorage.clear();
-    resetStatus()
-    console.log("session ended")
+  await response.json()
+  localStorage.clear();
+  resetStatus()
+  // console.log("session ended")
 }
 
 // reset button values if page is refreshed while still logged in
@@ -93,7 +93,7 @@ function resetStatus() {
   buttonText.innerHTML = "Login";
   buttonText.setAttribute("id", "main-login-button")
   buttonText.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
-  console.log("reset status")
+  // console.log("reset status")
 }
 
 // check session status
@@ -102,10 +102,10 @@ function sessionStatus() {
     buttonText.setAttribute("id", "logout-button")
     buttonText.innerText = "Logout"
     buttonText.addEventListener('click', event => { endSession(event) })  
-    console.log("session status logged in")
+    // console.log("session status logged in")
   } else {
     buttonText.innerText = "Login";
     buttonText.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
-    console.log("session status logged out")
+    // console.log("session status logged out")
   }
 }
