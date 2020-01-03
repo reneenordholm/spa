@@ -18,18 +18,19 @@ class SessionAdapter {
                 this.endSession(event)
               console.log("end session")
             })
-          }
+        }
 
         // listen for login request after credentials are entered
         this.submit = document.getElementById('login-button')
-        this.submit.addEventListener('click', event => { this.startSession(event) })
+        this.submit.addEventListener('click', event => {this.startSession(event)})
 
         // When the user clicks anywhere outside of the login modal, close it
-        window.onclick = function(event) {
+        this.windowClick = window
+        this.windowClick.addEventListener('click', event => { 
             if (event.target == this.modal) {
                 this.modal.style.display = "none";
             }
-        }
+        })
     }
     
     get headers(){
@@ -42,7 +43,7 @@ class SessionAdapter {
     // POST request to login
     async startSession(event) {
         event.preventDefault(event)
-        const response = await fetch('http://localhost:3000/sessions', {
+        const response = await fetch(`${this.baseUrl}`, {
         method: "POST",
         headers: this.headers,
         body: JSON.stringify({
@@ -55,6 +56,7 @@ class SessionAdapter {
         if (json.renee) {
             localStorage.setItem("user", json.renee.email);
             this.renderEditMode()
+            this.form.reset()
             console.log("session started")
         } else {
             this.renderLoginFailed(json);
@@ -79,7 +81,7 @@ class SessionAdapter {
     //delete request to clear session and localStorage
     async endSession(event) {
         event.preventDefault(event)
-        const response = await fetch('http://localhost:3000/sessions', {
+        const response = await fetch(`${this.baseUrl}`, {
         method: "DELETE",
         headers: this.headers
         });
