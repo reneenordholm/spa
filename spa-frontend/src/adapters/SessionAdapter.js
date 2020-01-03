@@ -1,22 +1,41 @@
 // connect frontend to backend API
-class SessionsAdapter {
+class SessionAdapter {
     constructor() {
         this.baseUrl = 'http://localhost:3000/sessions'
-        // this.csrf = null
-        this.bindListeners()
+        this.bindEventListeners()
+        this.sessionStatus()
     }
 
-    bindListeners() {
-        this.form = document.getElementsByClassName('modal-content animate')[0]
+    bindEventListeners() {
         this.modal = document.getElementById('id01');
+        this.user = localStorage.getItem("user")
         this.buttonText = document.getElementById('main-login-button')
+        this.form = document.getElementsByClassName('modal-content animate')[0]
+
+        if (document.getElementById('logout-button')) {
+            this.logoutButton = document.getElementById('logout-button')
+            this.logoutButton.addEventListener('click', event => {
+                this.endSession(event)
+              console.log("end session")
+            })
+          }
+
+        // listen for login request after credentials are entered
+        this.submit = document.getElementById('login-button')
+        this.submit.addEventListener('click', event => { this.startSession(event) })
+
+        // When the user clicks anywhere outside of the login modal, close it
+        window.onclick = function(event) {
+            if (event.target == this.modal) {
+                this.modal.style.display = "none";
+            }
+        }
     }
     
     get headers(){
         return {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'X-CSRF-TOKEN': this.csrf
         }
     }
 
@@ -35,7 +54,7 @@ class SessionsAdapter {
     const json = await response.json();
         if (json.renee) {
             localStorage.setItem("user", json.renee.email);
-            this.renderEditMode(json)
+            this.renderEditMode()
             console.log("session started")
         } else {
             this.renderLoginFailed(json);
@@ -43,7 +62,7 @@ class SessionsAdapter {
     }
 
     // logged in and show edit buttons
-    renderEditMode(json) {
+    renderEditMode() {
         this.modal.style.display = "none";
         this.buttonText.setAttribute("id", "logout-button")
         this.buttonText.removeAttribute("onclick")
@@ -65,19 +84,31 @@ class SessionsAdapter {
         headers: this.headers
         });
         const json = await response.json()
-            console.log(json)
             localStorage.clear()
             this.resetStatus()
             console.log("session ended")
     }
 
-        // reset button values if page is refreshed while still logged in
-        resetStatus() {
-            this.buttonText.innerHTML = "Login";
-            this.buttonText.setAttribute("id", "main-login-button")
+    // reset button values if page is refreshed while still logged in
+    resetStatus() {
+        this.buttonText.innerHTML = "Login";
+        this.buttonText.setAttribute("id", "main-login-button")
+        this.buttonText.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
+        console.log("reset status")
+    }
+
+    // check session status
+    sessionStatus() {
+        if (this.user === "reneenordholm@gmail.com") {
+            this.buttonText.setAttribute("id", "logout-button")
+            this.buttonText.innerText = "Logout"
+            this.buttonText.addEventListener('click', (event => {this.endSession(event)}))  
+            console.log("session status logged in")
+        } else {
+            this.buttonText.innerText = "Login";
             this.buttonText.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
-            // this.sessionStatus()
-            console.log("reset status")
+            console.log("session status logged out")
         }
+    }
 }
 
