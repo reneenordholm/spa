@@ -56,6 +56,7 @@ class SessionAdapter {
         if (json.renee) {
             localStorage.setItem("user", json.renee.email);
             this.renderEditMode()
+            this.form.reset()
             console.log("session started")
         } else {
             this.renderLoginFailed(json);
