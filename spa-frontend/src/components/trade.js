@@ -3,7 +3,7 @@ class Trade {
         this.trade_type = trade.trade_type
         this.img = trade.img
         this.description = trade.description
-        this.title = trade.title
+        this.title = trade.title     
     }
 
     renderTrade() {
@@ -27,6 +27,13 @@ class Trade {
             const pText = document.createElement('p')
             pText.innerText = this.description
             dPar.appendChild(pText)
+
+            if (localStorage.getItem("user")){
+                console.log("logged in") 
+            } else {
+                console.log("logged out")
+            }
+
 
         } else if (this.trade_type === "work") {
             const work = document.querySelector('div.work')
