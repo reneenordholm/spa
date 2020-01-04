@@ -55,24 +55,12 @@ class SessionAdapter {
     const json = await response.json();
         if (json.renee) {
             localStorage.setItem("user", json.renee.email);
-            // this.renderEditMode()
-            // this.form.reset()
             location.reload()
             // console.log("session started")
         } else {
             this.renderLoginFailed(json);
         }
     }
-
-    // logged in and show edit buttons
-    // renderEditMode() {
-    //     this.modal.style.display = "none";
-    //     this.buttonText.setAttribute("id", "logout-button")
-    //     this.buttonText.removeAttribute("onclick")
-    //     this.buttonText.innerText = "Logout"
-    //     this.buttonText.addEventListener('click', (event => {this.endSession(event)}))  
-    //     console.log("logged in, edit mode")
-    // }
 
     // if log in fails
     renderLoginFailed(json) {
@@ -89,17 +77,8 @@ class SessionAdapter {
         const json = await response.json()
             localStorage.clear()
             location.reload()
-            // this.resetStatus()
             // console.log("session ended")
     }
-
-    // reset button values if page is refreshed while still logged in
-    // resetStatus() {
-    //     this.buttonText.innerHTML = "Login";
-    //     this.buttonText.setAttribute("id", "main-login-button")
-    //     this.buttonText.setAttribute("onclick", "document.getElementById('id01').style.display='block'")
-    //     console.log("reset status")
-    // }
 
     // check session status
     sessionStatus() {
