@@ -1,5 +1,6 @@
 class Trade {
     constructor(trade) {
+        this.id = trade.id
         this.trade_type = trade.trade_type
         this.img = trade.img
         this.description = trade.description
@@ -11,6 +12,17 @@ class Trade {
         // add object to page by type
         if (this.trade_type === "about") {
             const about = document.querySelector('div.about')
+
+            if (localStorage.getItem("user")){
+                about.setAttribute('id', this.id)
+                about.addEventListener('click', event => {
+                    alert(`${this.id} has been clicked`)
+                })
+                console.log("logged in") 
+            } else {
+                console.log("logged out")
+            }
+
             const dImg = document.createElement('div')
             dImg.setAttribute("class", "dImg")
             about.appendChild(dImg)
@@ -28,18 +40,20 @@ class Trade {
             pText.innerText = this.description
             dPar.appendChild(pText)
 
-            if (localStorage.getItem("user")){
-                console.log("logged in") 
-            } else {
-                console.log("logged out")
-            }
-
-
         } else if (this.trade_type === "work") {
+
             const work = document.querySelector('div.work')
             const column = document.createElement('div')
             column.setAttribute("class", "column")
             work.appendChild(column)
+
+            
+            if (localStorage.getItem("user")){
+                column.setAttribute('id', this.id)
+                column.addEventListener('click', event => {
+                    alert(`${this.id} has been clicked`)
+                })
+            }
 
             const content = document.createElement('div')
             content.setAttribute("class", "content")
