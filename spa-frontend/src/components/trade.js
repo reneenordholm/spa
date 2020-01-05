@@ -66,7 +66,6 @@ class Trade {
                 editSubmit.addEventListener('click', event => {
                     event.preventDefault(event)
                     event.editTrade(event)
-
                 })
 
                 // When the user clicks anywhere outside of the edit modal, close it
