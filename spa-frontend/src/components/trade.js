@@ -15,9 +15,66 @@ class Trade {
 
             if (localStorage.getItem("user")){
                 about.setAttribute('id', this.id)
-                about.addEventListener('click', event => {
-                    alert(`${this.id} has been clicked`)
+
+                const editModal = document.createElement('div')
+                editModal.setAttribute('id', 'id02')
+                editModal.setAttribute('class', 'edit-modal')
+                about.appendChild(editModal)
+
+                about.setAttribute("onclick", "document.getElementById('id02').style.display='block'")
+
+                const editForm = document.createElement('form')
+                editForm.setAttribute('class', "edit-modal-content edit-animate")
+                editForm.setAttribute('action', `/trades/${this.id}`)
+                editForm.setAttribute('method', 'patch')
+                editModal.appendChild(editForm)
+
+                const editContainer = document.createElement('div')
+                editContainer.setAttribute('class', "edit-container")
+                editForm.appendChild(editContainer)
+
+                const imgEditTitle = document.createElement('label')
+                imgEditTitle.setAttribute('for', 'img')
+                imgEditTitle.innerText = "Image Link"
+                editContainer.appendChild(imgEditTitle)
+
+                const imgInput = document.createElement('input')
+                imgInput.setAttribute('type', 'text')
+                imgInput.setAttribute('value', this.img)
+                imgInput.setAttribute('name', 'img')
+                editContainer.appendChild(imgInput)
+                
+                const imgDescTitle = document.createElement('label')
+                imgDescTitle.setAttribute('for', 'description')
+                imgDescTitle.innerText = "Description"
+                editContainer.appendChild(imgDescTitle)
+
+                const bioInput = document.createElement('input')
+                bioInput.setAttribute('type', 'text')
+                bioInput.setAttribute('value', this.description)
+                bioInput.setAttribute('name', 'description')
+                editContainer.appendChild(bioInput)
+
+                const editButton = document.createElement('button')
+                editButton.setAttribute('id', 'edit-button')
+                editButton.setAttribute('type', 'submit')
+                editButton.innerText = "Submit Edit"
+                editContainer.appendChild(editButton)
+
+                // listen for login request after credentials are entered
+                const editSubmit = document.getElementById('edit-button')
+                editSubmit.addEventListener('click', event => {
+                    event.preventDefault(event)
+                    alert(event.target)
                 })
+
+                // When the user clicks anywhere outside of the edit modal, close it
+                window.addEventListener('click', event => { 
+                    if (event.target == editModal) {
+                        editModal.style.display = "none";
+                    }
+                })
+
                 console.log("logged in") 
             } else {
                 console.log("logged out")
