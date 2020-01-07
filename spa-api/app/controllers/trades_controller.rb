@@ -1,4 +1,5 @@
 class TradesController < ApplicationController
+    skip_before_action :verify_authenticity_token
     
     # render all trades as json 
     def index
@@ -7,17 +8,13 @@ class TradesController < ApplicationController
     end
 
     def update
-        if logged_in?
-            trade = Trade.find_by(id: params[:id])
-            trade.update(trade_params)
+        trade = Trade.find_by(id: params[:id])
+        trade.update(trade_params)
 
-            if trade.save
-                render json: {errors: "trade saved"}
-            else
-                render json: {errors: "trade not saved"}
-            end
+        if trade.save
+            render json: {messages: "trade saved"}
         else
-            render json: {errors: "login to continue"}
+            render json: {errors: "trade not saved"}
         end
     end
 

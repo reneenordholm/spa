@@ -18,26 +18,16 @@ class TradesAdapter {
     }
 
     // PATCH request to save edit
-    async editTrade(event) {
-        event.preventDefault(event)
-        const editForm = document.getElementsByClassName('edit-modal-content edit-animate')[0]
-        const response = await fetch(`${this.baseUrl}/update`, {
+    async updateTrade(form) {
+        const res = await fetch(`${this.baseUrl}/${form.dataset.id}`, {
         method: "PATCH",
         headers: this.headers,
         body: JSON.stringify({
-            // id: 
-            img: editForm.img.value,
-            description: editForm.description.value
+            img: form.img.value,
+            description: form.description.value
         })
     });
-    // upon successful login set user as localStorage key
-    const json = await response.json();
-        if (json.renee) {
-            localStorage.setItem("user", json.renee.email);
-            location.reload()
-            // console.log("session started")
-        } else {
-            this.renderLoginFailed(json);
-        }
+        const json = await res.json()
+        location.reload()
     }
 }

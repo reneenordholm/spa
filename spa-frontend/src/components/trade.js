@@ -4,7 +4,8 @@ class Trade {
         this.trade_type = trade.trade_type
         this.img = trade.img
         this.description = trade.description
-        this.title = trade.title     
+        this.title = trade.title  
+        this.adapter = new TradesAdapter()
     }
 
     renderTrade() {
@@ -25,6 +26,7 @@ class Trade {
 
                 const editForm = document.createElement('form')
                 editForm.setAttribute('class', "edit-modal-content edit-animate")
+                editForm.dataset.id = this.id
                 editForm.setAttribute('action', `/trades/${this.id}`)
                 editForm.setAttribute('method', 'patch')
                 editModal.appendChild(editForm)
@@ -61,11 +63,13 @@ class Trade {
                 editButton.innerText = "Submit Edit"
                 editContainer.appendChild(editButton)
 
+                const form = document.getElementsByClassName('edit-modal-content edit-animate')[0]
+
                 // listen for login request after credentials are entered
                 const editSubmit = document.getElementById('edit-button')
                 editSubmit.addEventListener('click', event => {
                     event.preventDefault(event)
-                    event.editTrade(event)
+                    this.adapter.updateTrade(form)
                 })
 
                 // When the user clicks anywhere outside of the edit modal, close it
