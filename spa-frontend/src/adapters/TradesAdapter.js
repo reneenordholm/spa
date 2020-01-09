@@ -19,15 +19,29 @@ class TradesAdapter {
 
     // PATCH request to save edit
     async updateTrade(form) {
-        const res = await fetch(`${this.baseUrl}/${form.dataset.id}`, {
-        method: "PATCH",
-        headers: this.headers,
-        body: JSON.stringify({
-            img: form.img.value,
-            description: form.description.value
-        })
-    });
-        const json = await res.json()
+        if (form.title.value) {
+            const res = await fetch(`${this.baseUrl}/${form.dataset.id}`, {
+                method: "PATCH",
+                headers: this.headers,
+                body: JSON.stringify({
+                    img: form.img.value,
+                    description: form.description.value,
+                    title: form.title.value
+                })
+            });
+            const json = await res.json()
+        } else {
+            const res = await fetch(`${this.baseUrl}/${form.dataset.id}`, {
+                method: "PATCH",
+                headers: this.headers,
+                body: JSON.stringify({
+                    img: form.img.value,
+                    description: form.description.value
+                })
+            });
+            const json = await res.json()
+
+        }
         location.reload()
     }
 }
