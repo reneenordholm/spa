@@ -1,9 +1,4 @@
-/* div.login {
-  text-align: right;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-} */
-
-/* Login Start */
+ /* Login Start */
 /* Full-width input fields */
 input[type=text], input[type=password] {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -18,7 +13,7 @@ input[type=text], input[type=password] {
   /* Set a style for all buttons */
   button {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: #4CAF50;
+    background-color: rgb(4, 132, 155);
     color: white;
     padding: 14px 20px;
     margin: 8px 0;

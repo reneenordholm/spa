@@ -14,6 +14,7 @@ class TradesAdapter {
         return {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': this.csrf
         }
     }
 
@@ -23,6 +24,7 @@ class TradesAdapter {
             const res = await fetch(`${this.baseUrl}/${form.dataset.id}`, {
                 method: "PATCH",
                 headers: this.headers,
+                credentials: 'include',
                 body: JSON.stringify({
                     img: form.img.value,
                     description: form.description.value,
@@ -34,6 +36,7 @@ class TradesAdapter {
             const res = await fetch(`${this.baseUrl}/${form.dataset.id}`, {
                 method: "PATCH",
                 headers: this.headers,
+                credentials: 'include',
                 body: JSON.stringify({
                     img: form.img.value,
                     description: form.description.value

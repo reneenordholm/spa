@@ -12,7 +12,13 @@ class SessionsController < ApplicationController
         end
     end
 
+    # def auth_check
+    #     cookies["logged_in"] = logged_in?
+    #     render json: {csrf_auth_token: form_authenticity_token}
+    # end
+
     def destroy
+        # authenticate
         session.clear
         render json: {messages: "logged out"}
     end
@@ -21,6 +27,7 @@ class SessionsController < ApplicationController
 
     def login(renee)
         session[:renee_id] = renee.id
+        # cookies["logged_in"] = true
     end
 
 end
