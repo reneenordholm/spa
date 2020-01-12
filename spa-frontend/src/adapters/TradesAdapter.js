@@ -14,7 +14,6 @@ class TradesAdapter {
         return {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': this.csrf
         }
     }
 

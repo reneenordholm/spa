@@ -2,7 +2,6 @@ class Trades {
     constructor() {
         this.trades = []
         this.adapter = new TradesAdapter()
-        // this.bindEventListeners()
         this.fetchAndLoadTrades()
     }
 

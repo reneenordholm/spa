@@ -7,6 +7,7 @@ class TradesController < ApplicationController
         render json: trades.to_json(:except => [:created_at, :updated_at])
     end
 
+    # find trade and save
     def update
         trade = Trade.find_by(id: params[:id])
         trade.update(trade_params)

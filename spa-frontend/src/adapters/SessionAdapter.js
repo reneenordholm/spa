@@ -4,8 +4,6 @@ class SessionAdapter {
         this.baseUrl = 'http://localhost:3000/sessions'
         this.bindEventListeners()
         this.sessionStatus()
-        // this.authSetup()
-        // this.csrf = null
     }
 
     bindEventListeners() {
@@ -39,7 +37,6 @@ class SessionAdapter {
         return {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'X-CSRF-TOKEN': this.csrf
         }
     }
 
@@ -49,7 +46,6 @@ class SessionAdapter {
         const response = await fetch(`${this.baseUrl}`, {
         method: "POST",
         headers: this.headers,
-        // credentials: 'include',
         body: JSON.stringify({
             email: this.form[0].value,
             password: this.form[1].value
@@ -77,22 +73,12 @@ class SessionAdapter {
         const response = await fetch(`${this.baseUrl}`, {
         method: "DELETE",
         headers: this.headers,
-        // credentials: 'include'
         });
         // const json = await response.json()
-        // this.authSetup()
         localStorage.clear()
         location.reload()
             // console.log("session ended")
     }
-
-    // async authSetup(){
-    //     const res = await fetch('http://localhost:3000/auth-check',{
-    //         credentials: 'include'
-    //     })
-    //     const body = await res.json()
-    //     this.csrf = body.csrf_auth_token
-    // }
 
     // check session status
     sessionStatus() {
